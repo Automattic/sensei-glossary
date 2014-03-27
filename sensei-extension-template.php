@@ -3,7 +3,7 @@
  * Plugin Name: Sensei Extension Template
  * Version: 1.0.0
  * Plugin URI: http://www.woothemes.com/
- * Description: Code template for all new Sensei extensions.
+ * Description: 
  * Author: WooThemes
  * Author URI: http://www.woothemes.com/
  * Requires at least: 3.8
@@ -46,8 +46,17 @@ if ( ! function_exists( 'is_sensei_active' ) ) {
 
 if( is_sensei_active() ) {
 
-	require_once( 'classes/class-sensei-extension-template.php' );
+	require_once( 'includes/class-sensei-extension-template.php' );
 
-	global $sensei_extension_template;
-	$sensei_extension_template = new Sensei_Extension_Template( __FILE__, '1.0.0' );
+	/**
+	 * Returns the main instance of Sensei_Share_Your_Grade to prevent the need to use globals.
+	 *
+	 * @since  1.0.0
+	 * @return object Sensei_Extension_Template
+	 */
+	function Sensei_Extension_Template() {
+		return Sensei_Extension_Template::instance( __FILE__, '1.0.0' );
+	}
+
+	Sensei_Extension_Template();
 }
