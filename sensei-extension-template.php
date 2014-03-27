@@ -49,7 +49,7 @@ if( is_sensei_active() ) {
 	require_once( 'includes/class-sensei-extension-template.php' );
 
 	/**
-	 * Returns the main instance of Sensei_Share_Your_Grade to prevent the need to use globals.
+	 * Returns the main instance of Sensei_Extension_Template to prevent the need to use globals.
 	 *
 	 * @since  1.0.0
 	 * @return object Sensei_Extension_Template

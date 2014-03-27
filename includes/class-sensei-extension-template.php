@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 class Sensei_Extension_Template {
 
 	/**
-	 * Sensei_Extension_Template The single instance of Sensei_Extension_Template.
+	 * The single instance of Sensei_Extension_Template.
 	 * @var 	object
 	 * @access  private
 	 * @since 	1.0.0
