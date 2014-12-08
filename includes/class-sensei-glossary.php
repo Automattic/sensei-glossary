@@ -115,6 +115,10 @@ class Sensei_Glossary {
         require_once( 'class-sensei-glossary-posttype.php' );
         $this->posttype = new Sensei_Glossary_Posttype();
 
+        // load the shortcode-output
+        require_once( 'class-sensei-glossary-shortcode.php' );
+        $this->posttype = new Sensei_Glossary_Shortcode();
+
     } // end load_plugin_classes
 
 	/**
