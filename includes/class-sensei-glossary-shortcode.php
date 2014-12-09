@@ -50,6 +50,11 @@ class Sensei_Glossary_Shortcode {
         $glossary_item_content = $glossary_item->post_content;
         $glossary_item_title = $glossary_item->post_title;
 
+        // alternatively use the content specified
+        if( ! empty( $content ) ) {
+            $glossary_item_title =  $content;
+        }
+
         /**
          * Filter the glossary item  css classes.
          *
@@ -57,16 +62,43 @@ class Sensei_Glossary_Shortcode {
          *
          * @param array        $css_classes             Whether or not to parse the request. Default true.
          */
-        $classes = implode( ' ', apply_filters( 'sensei_glossary_item_css_classes', array( 'sensei-glossary', 'glossary' ) ) );
+        $item_classes = implode( ' ', apply_filters( 'sensei_glossary_item_css_classes', array( 'sensei-glossary-content', 'glossary' ) ) );
 
         //build the hidden content
-        $glossary_html_content_attributes =  'id="' . $glossary_item_id  . '" class="' . $classes . '" ';
-        $glossary_html_content = '<aside ' . $glossary_html_content_attributes . ' >' . $glossary_item_content  . '</aside>';
+        $glossary_html_content_attributes =  'id="' . $glossary_item_id  . '" class="' . $item_classes . '" ';
+        $glossary_html_content = '<span ' . $glossary_html_content_attributes . ' ><span>' . $glossary_item_content  . '</span></span>';
 
+        /**
+         * Filter the glossary link css classes.
+         *
+         * @since 1.0.0
+         *
+         * @param array        $css_classes             Whether or not to parse the request. Default true.
+         */
+        $link_classes = implode( ' ', apply_filters( 'sensei_glossary_link_css_classes', array( 'thickbox', 'sensei-glossary' ) ) );
 
         // create the html out to be returned
         $output = '';
-        $output .= '<a class="sensei-glossary" href="#' . $glossary_item_id . '" >' . $glossary_item_title .'</a>';
+
+        /**
+         * Filter the glossary link href for all elements
+         *
+         * @since 1.0.0
+         *
+         * @param string  $glossary_link_href     the href applied to all glossary links
+         */
+        $glossary_link_href = apply_filters( 'sensei_glossary_link_href', '#TB_inline' );
+
+        /**
+         * Filter the glossary link href for a specific glossary ID
+         *
+         * @since 1.0.0
+         *
+         * @param string  $glossary_link_href     the href applied to a specif glossary ID
+         */
+        $glossary_link_href = apply_filters( 'sensei_glossary_link_href_'.$glossary_item_id,  $glossary_link_href . '?inlineId=' . $glossary_item_id  );
+
+        $output .= '<a class="'. $link_classes .'" title="' . $glossary_item_title . '"href="'. $glossary_link_href .'" data-glossary-id="' . $glossary_item_id . '" >' . $glossary_item_title .'</a>';
 
         /**
          * Filter the glossary hidden item html content

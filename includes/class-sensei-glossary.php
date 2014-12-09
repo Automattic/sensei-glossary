@@ -133,7 +133,10 @@ class Sensei_Glossary {
 	 */
 	public function enqueue_styles () {
 		global $woothemes_sensei;
+        //thickbox
+        wp_enqueue_style( 'thickbox' );
 
+        //plugin css
 		wp_register_style( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'css/frontend.css', array( $woothemes_sensei->token . '-frontend' ), $this->_version );
 		wp_enqueue_style( $this->_token . '-frontend' );
 	} // End enqueue_styles()
@@ -147,8 +150,9 @@ class Sensei_Glossary {
 	public function enqueue_scripts () {
 		global $woothemes_sensei;
 
-		wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery' ), $this->_version );
+		wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery', 'thickbox' ), $this->_version );
 		wp_enqueue_script( $this->_token . '-frontend' );
+
 	} // End enqueue_scripts()
 
 	/**
@@ -175,6 +179,7 @@ class Sensei_Glossary {
         // select2
         wp_register_script( 'select2', esc_url( $this->assets_url ) . 'js/select2.min.js', array( 'jquery' ), $this->_version );
         wp_enqueue_script( 'select2' );
+
 	} // End admin_enqueue_scripts()
 
 	/**
