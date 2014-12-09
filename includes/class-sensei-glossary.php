@@ -119,6 +119,10 @@ class Sensei_Glossary {
         require_once( 'class-sensei-glossary-shortcode.php' );
         $this->posttype = new Sensei_Glossary_Shortcode();
 
+        // MCE editor plugin
+        require_once( 'class-sensei-glossary-editor-mce.php' );
+        $this->posttype = new Sensei_Glossary_Editor_MCE();
+
     } // end load_plugin_classes
 
 	/**
@@ -167,6 +171,10 @@ class Sensei_Glossary {
 	public function admin_enqueue_scripts ( $hook = '' ) {
 		wp_register_script( $this->_token . '-admin', esc_url( $this->assets_url ) . 'js/admin' . $this->script_suffix . '.js', array( 'jquery' ), $this->_version );
 		wp_enqueue_script( $this->_token . '-admin' );
+
+        // select2
+        wp_register_script( 'select2', esc_url( $this->assets_url ) . 'js/select2.min.js', array( 'jquery' ), $this->_version );
+        wp_enqueue_script( 'select2' );
 	} // End admin_enqueue_scripts()
 
 	/**
