@@ -17,9 +17,6 @@ class Sensei_Glossary_Posttype {
         //register category taxonomy
         add_action( 'init', array( $this , 'register_glossary_category_taxonomy' ) );
 
-        // load the custom dash icon
-        add_action('admin_head', array( $this, 'load_dash_icon') );
-
 	} // End __construct()
 
 
@@ -103,25 +100,4 @@ class Sensei_Glossary_Posttype {
         register_taxonomy( 'sensei_glossary_category', array( 'sensei_glossary' ), $args );
 
     }// end register_glossary_category_taxonomy
-
-
-    /**
-     * Sensei_Glossary_Posttype::load_dash_icon
-     *
-     * Load the admin menu dashboard icon for the glossary main menu item
-     *
-     * @since 1.0.0
-     * @return void
-     */
-    public function load_dash_icon() {
-        ?>
-            <style>
-                #menu-posts-sensei_glossary .dashicons-before:before {
-                    content: "\f123" ;
-                }
-            </style>
-        <?php
-    } // end load_dash_icon
-
-
 }// end load_plugin_classes

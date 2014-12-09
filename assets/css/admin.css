@@ -1,0 +1,6 @@
+
+#menu-posts-sensei_glossary .dashicons-before:before,
+i.mce-i-sensei_glossary:before {
+    font-family: "dashicons";
+    content: "\f123" ;
+}
