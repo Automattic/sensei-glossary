@@ -82,15 +82,6 @@ jQuery( document ).ready( function ( e ) {
 
         }// en onButtonClick
 
-        /**
-         * onPanelClick
-         *
-         * Respond to the MCE panelClick event
-         * @since 1.0.0
-         */
-        var onPanelClick = function ( e ){
-
-        }// end onPanelClick
 
         /**
          * MAIN()
