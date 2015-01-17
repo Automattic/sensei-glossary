@@ -133,16 +133,14 @@ class Sensei_Glossary {
 	 */
 	public function enqueue_styles () {
 		global $woothemes_sensei;
-        //thickbox
-        wp_enqueue_style( 'thickbox' );
 
         //plugin css
-		wp_register_style( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'css/frontend.css', array( $woothemes_sensei->token . '-frontend' ), $this->_version );
-		wp_enqueue_style( $this->_token . '-frontend' );
+		wp_register_style( $this->_token . '-frontend-css', esc_url( $this->assets_url ) . 'css/frontend'. $this->script_suffix  . '.css', array( ), $this->_version );
+		wp_enqueue_style( $this->_token . '-frontend-css' );
 	} // End enqueue_styles()
 
 	/**
-	 * Load frontend Javascript.
+	 * Load frontend Scripts and Styles.
 	 * @access  public
 	 * @since   1.0.0
 	 * @return void
@@ -150,8 +148,9 @@ class Sensei_Glossary {
 	public function enqueue_scripts () {
 		global $woothemes_sensei;
 
-		wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery', 'thickbox' ), $this->_version );
-		wp_enqueue_script( $this->_token . '-frontend' );
+		// load the frontend javascript
+		wp_register_script( $this->_token . '-frontend', esc_url( $this->assets_url ) . 'js/frontend' . $this->script_suffix . '.js', array( 'jquery', 'thickbox' ), $this->_version, true );
+		wp_enqueue_script( $this->_token . '-frontend');
 
 	} // End enqueue_scripts()
 
