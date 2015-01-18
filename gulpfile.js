@@ -14,11 +14,9 @@ gulp.task('clean', function(cb) {
 
 });
 
-gulp.task('default', function() {
-    gulp.run('clean');
+gulp.task('default', [ 'clean' ] , function() {
     gulp.run('css') ;
     gulp.run('javascript');
-  //  gulp.run( 'watch' );
 });
 
 gulp.task('css', function(){
@@ -40,7 +38,7 @@ gulp.task('watch', function() {
     // NOTE: this watch recusrively loops when .min changes, find a way to avoid this then
     // activate the watch again.
     // Watch .js files
-   // gulp.watch('assets/js/*.js', ['javascript']);
+    //gulp.watch( ['assets/js/*.js' , '!assets/js/*.js' ], ['javascript']);
    // gulp.watch('assets/css/*.css', ['css']);
 
 });
