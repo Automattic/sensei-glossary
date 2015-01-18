@@ -40,10 +40,13 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 
 		//show the popup
 		this.glossaryPopup( popupContent );
+
+
 	}
 
 	// find all the popup links on the page and attach a click event listener
 	// and make sure this within the call back always points to the senseiPopup object
+
 	$( queryId ).on( 'click', $.proxy( this.popupClickListener, this ) );
 
 	// display the lightbox
@@ -53,9 +56,7 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 		if ($('#sensei-glossary-popup').size() == 0) {
 			this.theLightbox = $('<div id="sensei-glossary-popup"/>');
 			this.theShadow = $('<div id="sensei-glossary-shadow"/>');
-			$(theShadow).click(function (e) {
-				closeLightbox();
-			});
+
 			$('body').append(this.theShadow);
 			$('body').append(this.theLightbox);
 		}
@@ -73,6 +74,22 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 		this.theLightbox.show();
 		this.theShadow.show();
 
+		// make sure the shadow covers the page:
+		this.adjustShadow();
+
+		// register shadow click event
+		$( this.theShadow ).click( $.proxy( this.closeLightbox , this ) );
+
+		// add the escape key listener
+		$(document).keyup(  $.proxy( function( e ) {
+			if (e.keyCode == 27) { // 27 = escape
+				this.closeLightbox();
+			}
+		}, this ) );
+
+		// add teh scroll listerne
+		$( window ).scroll( $.proxy( this.adjustShadow , this ) );
+
 	}
 
 	// close the lightbox
@@ -84,7 +101,20 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 
 		// remove contents of lightbox in case a video or other content is actively playing
 		this.theLightbox.empty();
+
+		//remove the ecape keyup event
+		 $( document ).unbind('keyup', this.closeLightbox );
+		 $( window ).unbind( 'scroll' , this.adjustShadow );
+		 $( this.theShadow ).unbind( 'click' , this.closeLightbox );
 	}
+
+	this.adjustShadow = function( ){
+		var winTop = $( window ).scrollTop();
+		this.theShadow.css( 'top', winTop  );
+
+	}// end adjustShadow
+
+
 
 } // senseiPopup object declaration
 
