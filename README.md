@@ -1,4 +1,4 @@
-Sensei Extension Template
+Sensei Glossary Extension
 =========================
 
-Code template for all new Sensei extensions.
+This extension adds inline Glossary links which pops up when clicked.
