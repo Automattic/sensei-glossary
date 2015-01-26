@@ -34,7 +34,7 @@ class Sensei_Glossary_Editor_MCE {
 
         // Check if user have permission
         if ( !current_user_can( 'edit_lessons' ) ) {
-            return;
+            return $buttons;
         }
 
         array_push( $buttons, 'sensei_glossary' );
