@@ -54,7 +54,7 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 
 		// add lightbox/shadow <div/>'s if not previously added
 		if ($('#sensei-glossary-popup').size() == 0) {
-			this.theLightbox = $('<div id="sensei-glossary-popup"/>');
+			this.theLightbox = $('<div class="entry hentry" id="sensei-glossary-popup"/>');
 			this.theShadow = $('<div id="sensei-glossary-shadow"/>');
 
 			$('body').append(this.theShadow);

@@ -40,7 +40,10 @@ class Sensei_Glossary_Shortcode {
         }
 
         // query WordPress for the glossary item
+        global $post;
         $glossary_item = get_post( $atts['id']  );
+        $post = $glossary_item;
+        setup_postdata( $post );
 
         // exit if a no volid post is returned
         if( empty( $glossary_item ) ){
@@ -49,7 +52,7 @@ class Sensei_Glossary_Shortcode {
 
         // setup the  need values before bulding the html output
         $glossary_item_id = $glossary_item->ID;
-        $glossary_item_title = $glossary_item->post_title;
+        $glossary_item_title = get_the_title();
 
         // we use the title by default but if shortcode content is supplied we
         // use the content instead
@@ -67,7 +70,9 @@ class Sensei_Glossary_Shortcode {
         $glossary_popup_classes = implode( ' ', apply_filters( 'sensei_glossary_popup_css_classes', array( 'sensei-glossary-content', 'glossary' ) ) );
 
         //convert raw html into a storage friendly text stream
-        $glossary_content = htmlentities( $glossary_item->post_content, ENT_QUOTES);
+        $content = apply_filters( 'the_content', get_the_content() );
+        $content = str_replace( ']]>', ']]&gt;', $content );
+        $glossary_content = htmlentities( $content , ENT_QUOTES )  ;
 
         /**
          * Filter the glossary link css classes.
@@ -103,6 +108,9 @@ class Sensei_Glossary_Shortcode {
          * @param array     $hidden_content             Whether or not to parse the request. Default true.
          */
         $output .= apply_filters( 'sensei_glossary_item_html_content',  $glossary_html_content );
+
+        // set the post data back to the original state
+        wp_reset_postdata();
 
         return $output;
 
