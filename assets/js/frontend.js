@@ -39,7 +39,7 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 		popupContent = $( event.target).data( 'glossary-content' );
 
 		//show the popup
-		this.glossaryPopup( popupContent );
+		this.glossaryPopup( popupContent , event);
 
 
 	}
@@ -50,10 +50,10 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 	$( queryId ).on( 'click', $.proxy( this.popupClickListener, this ) );
 
 	// display the lightbox
-	this.glossaryPopup = function (insertContent) {
+	this.glossaryPopup = function (insertContent, event) {
 
 		// add lightbox/shadow <div/>'s if not previously added
-		if ($('#sensei-glossary-popup').size() == 0) {
+		if ( $('#sensei-glossary-popup').size() == 0) {
 			this.theLightbox = $('<div class="entry hentry" id="sensei-glossary-popup"/>');
 			this.theShadow = $('<div id="sensei-glossary-shadow"/>');
 
@@ -65,6 +65,8 @@ var senseiPopupPrototype = function( $ , queryIdentifier ) {
 		this.theLightbox.empty();
 
 		// insert HTML content
+		var popupTitle = $( event.target).data( 'glossary-title' );
+		this.theLightbox.append( "<h2>" + popupTitle + "</h2>"  );
 		this.theLightbox.append(insertContent);
 
 		// move the lightbox to the current window top + 100px

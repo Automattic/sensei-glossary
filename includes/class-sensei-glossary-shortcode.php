@@ -115,7 +115,7 @@ class Sensei_Glossary_Shortcode {
 
         $output .= '<a class="' . $link_classes . '" title="' . $glossary_item_title . '" href="#" rel="'. $rel .'" '
                 . ' data-glossary-id="' . $glossary_item_id . '" data-glossary-popup-classes="' . $glossary_popup_classes
-                . '" data-glossary-content="' . $glossary_content
+                . '" data-glossary-content="' . $glossary_content . '" data-glossary-title="' . $glossary_item_title
                 . '" >' . trim( $glossary_item_title ) .'</a>';
 
         /**
