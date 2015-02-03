@@ -32,10 +32,10 @@ class Sensei_Glossary_Shortcode {
      */
     public function add_data_kses( $allowed_html_tags ){
 
-            $allowed_html_tags['a']['data-glossary-id'] = true;
-            $allowed_html_tags['a']['data-glossary-title'] = true;
-            $allowed_html_tags['a']['data-glossary-content'] = true;
-            $allowed_html_tags['a']['data-glossary-popup-classes'] = true;
+        $allowed_html_tags['a']['data-glossary-id'] = true;
+        $allowed_html_tags['a']['data-glossary-title'] = true;
+        $allowed_html_tags['a']['data-glossary-content'] = true;
+        $allowed_html_tags['a']['data-glossary-popup-classes'] = true;
 
         return $allowed_html_tags;
 
@@ -89,8 +89,7 @@ class Sensei_Glossary_Shortcode {
 
         //convert raw html into a storage friendly text stream
         $content = apply_filters( 'the_content', get_the_content() );
-        $content = str_replace( ']]>', ']]&gt;', $content );
-        $glossary_content = htmlentities( $content , ENT_QUOTES )  ;
+        $glossary_content =  htmlentities( str_replace( ']]>', ']]&gt;', $content ) , ENT_QUOTES )  ;
 
         /**
          * Filter the glossary link css classes.
@@ -113,9 +112,14 @@ class Sensei_Glossary_Shortcode {
          */
         $rel = apply_filters( 'sensei-glossary-link-rel'  , 'sensei-glossary' );
 
-        $output .= '<a class="' . $link_classes . '" title="' . $glossary_item_title . '" href="#" rel="'. $rel .'" '
-                . ' data-glossary-id="' . $glossary_item_id . '" data-glossary-popup-classes="' . $glossary_popup_classes
-                . '" data-glossary-content="' . $glossary_content . '" data-glossary-title="' . $glossary_item_title
+        $output .= '<a class="' . $link_classes
+
+            . '" title="' . substr( strip_tags( $content ) , 0, 50) . '...'
+                . '" data-glossary-id="' . $glossary_item_id
+                . '" data-glossary-popup-classes="' . $glossary_popup_classes
+                . '" data-glossary-content="' . $glossary_content
+                . '" data-glossary-title="' . $glossary_item_title
+                . '" href="#" rel="'. $rel .'" '
                 . '" >' . trim( $glossary_item_title ) .'</a>';
 
         /**

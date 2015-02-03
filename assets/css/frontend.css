@@ -38,3 +38,11 @@ span.sensei-glossary-content{
     z-index: 10000;
     display: none;
 }
+
+a.sensei-glossary {
+    border-bottom: 1px dashed #999999;
+}
+
+a.sensei-glossary:hover {
+    border-bottom: none;
+}
