@@ -98,7 +98,7 @@ class Sensei_Glossary_Shortcode {
         $output .= '<a class="' . $link_classes . '" title="' . $glossary_item_title . '" href="#" rel="'. $rel .'" '
                 . ' data-glossary-id="' . $glossary_item_id . '" data-glossary-popup-classes="' . $glossary_popup_classes
                 . '" data-glossary-content="' . $glossary_content
-                . '" >' . $glossary_item_title .'</a>';
+                . '" >' . trim( $glossary_item_title ) .'</a>';
 
         /**
          * Filter the glossary hidden item html content
