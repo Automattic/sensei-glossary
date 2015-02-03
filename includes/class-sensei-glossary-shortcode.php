@@ -20,8 +20,26 @@ class Sensei_Glossary_Shortcode {
 	public function __construct ( ) {
 
         add_shortcode( 'sensei_glossary', array( $this , 'show_glossary_item' ) );
+        add_filter( 'wp_kses_allowed_html', array( $this, 'add_data_kses'  ) );
 
 	} // End __construct()
+
+    /**
+     * Filter the pre_kses so that the glossary popup data will always be shown on the lesson / course pages
+     *
+     * @param $allowed_html_tags
+     * @return $allowed_html_tags
+     */
+    public function add_data_kses( $allowed_html_tags ){
+
+            $allowed_html_tags['a']['data-glossary-id'] = true;
+            $allowed_html_tags['a']['data-glossary-title'] = true;
+            $allowed_html_tags['a']['data-glossary-content'] = true;
+            $allowed_html_tags['a']['data-glossary-popup-classes'] = true;
+
+        return $allowed_html_tags;
+
+    }// end add_data_kses
 
     /**
      * Sensei_Glossary_Shortcode::show_glossary_item
