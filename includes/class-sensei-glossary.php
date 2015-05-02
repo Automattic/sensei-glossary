@@ -123,6 +123,10 @@ class Sensei_Glossary {
         require_once( 'class-sensei-glossary-editor-mce.php' );
         $this->posttype = new Sensei_Glossary_Editor_MCE();
 
+        // Category Class
+        require_once( 'class-sensei-glossary-category.php' );
+        add_action('init', array( 'Sensei_Glossary_Category' , 'wp_hooks'  ) );
+
     } // end load_plugin_classes
 
 	/**
