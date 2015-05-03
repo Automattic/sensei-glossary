@@ -112,6 +112,17 @@ class Sensei_Glossary_Shortcode {
          */
         $rel = apply_filters( 'sensei-glossary-link-rel'  , 'sensei-glossary' );
 
+
+        /**
+         * Filter the glossary hidden item html content
+         *
+         * @since 1.0.0
+         *
+         * @param array     $hidden_content             Whether or not to parse the request. Default true.
+         */
+        $output .= apply_filters( 'sensei_glossary_item_html_content',  $glossary_content );
+
+
         $output .= '<a class="' . $link_classes
 
             . '" title="' . substr( strip_tags( $content ) , 0, 50) . '...'
@@ -122,14 +133,7 @@ class Sensei_Glossary_Shortcode {
                 . '" href="#" rel="'. $rel .'" '
                 . '" >' . trim( $glossary_item_title ) .'</a>';
 
-        /**
-         * Filter the glossary hidden item html content
-         *
-         * @since 1.0.0
-         *
-         * @param array     $hidden_content             Whether or not to parse the request. Default true.
-         */
-        $output .= apply_filters( 'sensei_glossary_item_html_content',  $glossary_html_content );
+
 
         // set the post data back to the original state
         wp_reset_postdata();
