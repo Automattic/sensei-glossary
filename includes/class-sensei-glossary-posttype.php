@@ -58,7 +58,7 @@ class Sensei_Glossary_Posttype {
             'has_archive'        => true,
             'hierarchical'       => false,
             'menu_position'      => 54,
-            'supports'           => array( 'title', 'editor', 'author' )
+            'supports'           => array( 'title', 'editor' )
         );
 
         register_post_type( 'sensei_glossary', $args );
