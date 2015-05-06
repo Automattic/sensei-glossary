@@ -120,11 +120,9 @@ class Sensei_Glossary_Shortcode {
          *
          * @param array     $hidden_content             Whether or not to parse the request. Default true.
          */
-        $output .= apply_filters( 'sensei_glossary_item_html_content',  $glossary_content );
-
+        $glossary_content = apply_filters( 'sensei_glossary_item_html_content',  $glossary_content );
 
         $output .= '<a class="' . $link_classes
-
             . '" title="' . substr( strip_tags( $content ) , 0, 50) . '...'
                 . '" data-glossary-id="' . $glossary_item_id
                 . '" data-glossary-popup-classes="' . $glossary_popup_classes
